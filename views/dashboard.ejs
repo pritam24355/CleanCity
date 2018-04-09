@@ -19,13 +19,20 @@
     <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
     <!--  Google Font Style -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-yle -->
+
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+
 </head>
 <body>
 <div id="pre-div">
@@ -34,7 +41,7 @@ yle -->
 </div>
 <!--/. PRELOADER END -->
 <div class="navbar navbar-default navbar-fixed-top move-me ">
-    <div class="container">
+    <div class="container"
 
         <div class="navbar-collapse collapse move-me">
             <ul class="nav navbar-nav navbar-right">
@@ -74,54 +81,41 @@ yle -->
 
     </div>
 </div>
-<!--./ NAV BAR END -->
-<div id="home" >
-    <div class="overlay">
-        <div class="container">
-            <div class="row ">
-                <div class="col-lg-9 col-md-9 head-text">
-                    <h1 id="divDisp" >CLEAN CITY</h1>
 
-                    <span>
-                            <i class="fa fa-lightbulb-o" ></i>Analysed Sensor data
-                        </span>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat: 37.766302, lng: -122.444647};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+        var stations = JSON.parse('<%- JSON.stringify(stations) %>');
+        for (i = 0; i < stations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(stations[i].lat, stations[i].lng),
+            map: map
+          });
+          var infowindow = new google.maps.InfoWindow();
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(stations[i].station);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
 
-                    <span >
-                            <i class="fa fa-lightbulb-o" ></i>5 different air and water sensors deployed.
-                        </span>
-                    <button type="button" id="begin" class="btn btn-info "><a href="/api/">Dashboard</a></button>
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHrkw77KQeSTv4S8GQXh3zFPntHAyWfeQ&callback=initMap">
+    </script>
 
-
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="div-trans text-center">
-                        <h3>ADMIN LOGIN</h3>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12" >
-
-
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Username">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block btn-lg">Login</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-
-</div>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <!--  Core Bootstrap Script -->
 <script src="assets/js/bootstrap.js"></script>

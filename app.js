@@ -103,16 +103,25 @@ app.get('/api/get_logs_for_sensor/:sensor_id', function(req, res){
 });
 
 app.get('/dashboard',function(req,res){
-
-    res.render('dashboard');
+  var getStations_SQL = 'SELECT concat("Title: ", station_title, " | Description: ", station_desc) as station, lat, lng FROM smartcity.station';
+  mysql_connection.executeQuery(getStations_SQL, function(err, data){
+    console.log(JSON.stringify( data ));
+    if(err){
+      console.log(err);
+      res.status(500).send({"Message": "Internal Server Error"});
+    }
+    else{
+      console.log(data[0].lat);
+        res.render('dashboard', {stations: data});
+    }
+  }); 
+    
 
 });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next();
 });
 
 // error handler
