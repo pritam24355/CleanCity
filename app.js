@@ -37,6 +37,12 @@ app.use('/users', users);
 app.get('/',function(req,res){
 
     res.render('home')
+});
+app.post('/admincheck',function(req,res){
+  console.log(req.body);
+  if(req.body.username=="admin" && req.body.password=="admin"){
+    res.render('admin')
+  }
 
 });
 app.get('/api/getcities', function(req, res){
@@ -118,7 +124,20 @@ app.get('/dashboard',function(req,res){
     
 
 });
+app.get('/admin',function (req,res) {
+  res.render("admin")
 
+});
+app.get('/table',function(req,res){
+
+  res.render('table')
+});
+app.get('/adminsensormanagement',function (req,res) {
+   res.render('sensormanagement')
+}); 
+app.get('/adminstationmanagement',function (req,res) {
+    res.render('stationmanagement')
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next();
