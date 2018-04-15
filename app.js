@@ -134,7 +134,7 @@ app.get('/table',function(req,res){
 });
 app.get('/adminsensormanagement',function (req,res) {
    res.render('sensormanagement')
-}); 
+});
 app.get('/adminstationmanagement',function (req,res) {
     res.render('stationmanagement')
 });
