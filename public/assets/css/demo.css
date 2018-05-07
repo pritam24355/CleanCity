@@ -59,6 +59,13 @@
 .table-upgrade td:nth-child(3){
     text-align: center;
 }
+.sensordeletebutton {
+    margin-top: 22px;
+}
+
+.sensor{
+    margin-left: 17px;
+}
 
 @media all and (max-width: 991px)  {
     .sidebar .nav > li.active-pro{

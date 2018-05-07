@@ -32,6 +32,7 @@
 </head>
 <body>
 
+
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
@@ -55,19 +56,19 @@
                 <li>
                 <li>
                     <a href="/table">
-                        <i class="pe-7s-news-paper"></i>
+                        <i class="pe-7s-note2"></i>
                         <p>Stationwise Data</p>
                     </a>
                 </li>
-                <a href="/adminsensormanagement">
-                    <i class="pe-7s-news-paper"></i>
-                    <p>SENSOR MANAGEMENT</p>
+                <a href="/sensormanagement">
+                    <i class="pe-7s-note2"></i>
+                    <p>Sensor Management</p>
                 </a>
                 </li>
                 <li>
-                    <a href="/adminstationmanagement">
+                    <a href="/stationmanagement">
                         <i class="pe-7s-note2"></i>
-                        <p>STATION MANAGEMENT</p>
+                        <p>Station Management</p>
                     </a>
                 </li>
 
@@ -119,30 +120,32 @@
                         <div class="card">
                             <div class="header">
                                 <h1>STATION MANAGEMENT</h1>
-                                <button class="btn btn-group-sm">ADD</button>
-                                <button class="btn btn-group-sm">SUBTRACT</button>
-                                <button class="btn btn-group-sm">DELETE</button>
-                                <button class="btn btn-group-sm">EDIT</button>
+                                <a href="/stationmanagement" class="btn btn-group-sm">ADD</a>
+                                <a href="/stationupdate" class="btn btn-group-sm">UPDATE</a>
+                                <a href="/stationdelete" class="btn btn-group-sm">DELETE</a>
+
                             </div>
                             <div class="content">
-                                <form>
+                                <form action="/stationsubmit" METHOD="post">
                                     <div class="row">
-                                        <div class="col-md-5">
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>STATION ID</label>
-                                                <input type="text" class="form-control"  placeholder="STATION ID" >
+                                                <label>Select City</label>
+                                                <div>
+                                                <select class="form-control" name="cityid">
+                                                <% for (var i = 0; i < cities.length; i++) { %>
+
+                                                    <option type="number"  value="<%= cities[i].city_id %>"><%= cities[i].city_name %></option>
+                                                    <% } %>
+                                                </select>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>CITY ID</label>
-                                                <input type="text" class="form-control" placeholder="CITY ID">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Station Title</label>
-                                                <input type="email" class="form-control" placeholder="Station Title">
+                                                <input type="text" class="form-control" name="stationtitle" placeholder="Station Title">
                                             </div>
                                         </div>
                                     </div>
@@ -151,31 +154,29 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Station Desc</label>
-                                                <input type="text" class="form-control" placeholder="Station Desc">
+                                                <input type="text" class="form-control" name="stationdesc" placeholder="Station Desc">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Latitude</label>
-                                                <input type="text" class="form-control" placeholder="Latitude">
+                                                <input type="text" class="form-control" name="latitude" placeholder="Latitude">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Longitude</label>
-                                                <input type="text" class="form-control" placeholder="Longitude" >
+                                                <input type="text" class="form-control" name="longitude" placeholder="Longitude" >
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Active Status</label>
-                                                <input type="text" class="form-control" placeholder="IsActive?" >
+                                                <input type="number" class="form-control" name="isactive" placeholder="IsActive?" >
                                             </div>
                                         </div>
 
@@ -183,7 +184,7 @@
 
 
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">ADD Station</button>
+                                    <button type="submit" class="btn btn-info btn-fill">ADD Station</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>CLEANCITY</title>
+    <title>CleanCity</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,7 +29,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
 </head>
 <body>
 
@@ -62,20 +61,15 @@
                 </li>
                 <a href="/sensormanagement">
                     <i class="pe-7s-note2"></i>
-                    <p>SENSOR MANAGEMENT</p>
+                    <p>Sensor Management</p>
                 </a>
                 </li>
                 <li>
                     <a href="/stationmanagement">
                         <i class="pe-7s-note2"></i>
-                        <p>STATION MANAGEMENT</p>
+                        <p>Station Management</p>
                     </a>
                 </li>
-
-
-
-
-
             </ul>
         </div>
     </div>
@@ -92,9 +86,6 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <h3>CLEANCITY</h3>
-
-
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="">
@@ -114,29 +105,66 @@
         </nav>
 
 
-
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="card">
-
                             <div class="header">
-                                <h4 class="title">Sensor Statistics</h4>
-                                <p class="category">According to regions</p>
+                                <h1>SENSOR MANAGEMENT</h1>
+                                <a href="/sensormanagement" class="btn btn-group-sm">ADD</a>
+                                <a href="/sensorupdate" class="btn btn-group-sm">UPDATE</a>
+                                <a href="/sensordelete" class="btn btn-group-sm">DELETE</a>
+
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <form action="/sensorupdate" METHOD="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Select Sensor to update</label>
+                                                <div>
+                                                    <select class="form-control" name="sensorid">
+                                                        <% for (var i = 0; i < sensors.length; i++) { %>
+                                                        <option type="number" value="<%= sensors[i].sensor_id %>"><%= sensors[i].sensor_title %></option>
+                                                        <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>SENSOR SERIAL</label>
+                                                <input type="number" class="form-control" name="sensorserial" placeholder="Sensor Serial">
+                                            </div>
+                                        </div>
 
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Sensor1
-                                        <i class="fa fa-circle text-danger"></i> Sensor2
-                                        <i class="fa fa-circle text-warning"></i> Sensor3
                                     </div>
-                                    <hr>
 
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Sensor Desc</label>
+                                                <input type="text" class="form-control" name="sensordesc" placeholder="Sensor Description">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Active Status</label>
+                                                    <input type="number" class="form-control" name="isactive" placeholder="IsActive(0/1)" >
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <button type="submit" class="btn btn-info btn-fill sensor">ADD SENSOR</button>
+                                        <div class="clearfix"></div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -144,14 +172,11 @@
 
                 </div>
             </div>
+
         </div>
-
-
-
-
-
     </div>
 </div>
+
 
 
 </body>
@@ -174,15 +199,5 @@
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="assets/js/demo.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        demo.initChartist();
-
-
-
-    });
-</script>
 
 </html>
