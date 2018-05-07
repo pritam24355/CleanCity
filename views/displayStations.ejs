@@ -60,8 +60,8 @@
             </ul>
         </div>
     </div>
-    <div class="col-sm-10" style="margin-left:15%;padding:1px 16px;height:1000px;margin-right:1%;margin-top:5%">
-        <h2 style="text-align: center"> Station Data </h2>
+    <div class="col-sm-10" style="margin-left:15%;padding:1px 16px;height:1000px;margin-right:1%;margin-top:3%">
+        <h2 style="text-align: center;font-family: serif;  font-size: -webkit-xxx-large"> Station Data </h2>
         <div class="content-wrapper">
             <div class="container-fluid">
                 <!-- Breadcrumbs-->
@@ -87,6 +87,7 @@
                                     <th>Latitude</th>
                                     <th>Logitude</th>
                                     <th>Active status</th>
+                                    <th>Analysis Link</th>
                                 </tr>
                                 </thead>
                                 <% for(var i in stations)
@@ -101,6 +102,7 @@
                                     <td><%= stations[i].lat %></td>
                                     <td><%= stations[i].lng %></td>
                                     <td><%= stations[i].isactive %></td>
+                                    <td style="color: #1F77D0" onclick="window.location='/displaySensors'">click here</td>
                                     <td></td>
                                 </tr>
 
