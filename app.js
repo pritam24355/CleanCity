@@ -93,9 +93,9 @@ app.get('/api/get_sensors_for_station/:station_id', function(req, res){
   });
 });
 
-app.get('/api/get_logs_for_sensor/:sensor_id', function(req, res){
+app.get('/sensors/:sensor_id', function(req, res){
    
-  var get_cities_SQL = "SELECT log_data as logs FROM smartcity.sensor where sensor_id = "+req.params.sensor_id ;
+  var get_cities_SQL = "SELECT concat(log_data, ',',  created) as log FROM smartcity.sensor_log where sensor_id = "+req.params.sensor_id + " order by created desc";
 
   mysql_connection.executeQuery(get_cities_SQL, function(err, data){
     if(err){
@@ -103,13 +103,31 @@ app.get('/api/get_logs_for_sensor/:sensor_id', function(req, res){
       res.status(500).send({"Message": "Internal Server Error"});
     }
     else{
-        res.send(data);
+      console.log(data)
+        res.render('report', {logs: data});
+    }
+  });
+});
+
+
+app.get('/api/get_logs_for_sensor/:sensor_id', function(req, res){
+   
+  var get_cities_SQL = "SELECT log_data as log FROM smartcity.sensor_log where sensor_id = "+req.params.sensor_id ;
+
+  mysql_connection.executeQuery(get_cities_SQL, function(err, data){
+    if(err){
+      console.log(err);
+      res.status(500).send({"Message": "Internal Server Error"});
+    }
+    else{
+      console.log(data)
+        res.render('report', {logs: data});
     }
   });
 });
 
 app.get('/dashboard',function(req,res){
-  var getStations_SQL = 'SELECT concat("Title: ", station_title, " | Description: ", station_desc) as station, lat, lng FROM smartcity.station';
+  var getStations_SQL = 'SELECT concat("Title: ", station_title, " | Description: ", station_desc) as station, lat, lng, station_id FROM smartcity.station';
   mysql_connection.executeQuery(getStations_SQL, function(err, data){
     console.log(JSON.stringify( data ));
     if(err){
@@ -121,7 +139,7 @@ app.get('/dashboard',function(req,res){
         res.render('dashboard', {stations: data});
     }
   }); 
-    
+
 
 });
 app.get('/admin',function (req,res) {
