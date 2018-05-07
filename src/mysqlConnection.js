@@ -12,7 +12,7 @@ exports.executeQuery = function(query, callback){
 
 	pool.getConnection(function(err, connection) {
 	  // connected! (unless `err` is set)
-	  console.log("Conection Successful");
+	  console.log("Connection Successful");
 	  	if(err){
 	  		console.log(err);
 	  		callback(err);
