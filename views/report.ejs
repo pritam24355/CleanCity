@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    
+
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>ECOSAVE BOOTSTRAP ENVIRONMENT TEMPLATE</title>
+    <!--  Bootstrap Style -->
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet" />
+    <!--  Font-Awesome Style -->
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--  Animation Style -->
+    <link href="../../assets/css/animate.css" rel="stylesheet" />
+    <!--  Pretty Photo Style -->
+    <link href="../../assets/css/prettyPhoto.css" rel="stylesheet" />
+    <!--  Google Font Style -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+
+<script >
+    
+/**
+ * (c) 2010-2017 Torstein Honsi
+ *
+ * License: www.highcharts.com/license
+ *
+ * Dark theme for Highcharts JS
+ * @author Torstein Honsi
+ */
+
+'use strict';
+/* global document */
+// Load the fonts
+Highcharts.createElement('link', {
+    href: 'https://fonts.googleapis.com/css?family=Unica+One',
+    rel: 'stylesheet',
+    type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+Highcharts.theme = {
+    colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+    chart: {
+        backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+            stops: [
+                [0, '#2a2a2b'],
+                [1, '#3e3e40']
+            ]
+        },
+        style: {
+            fontFamily: '\'Unica One\', sans-serif'
+        },
+        plotBorderColor: '#606063'
+    },
+    title: {
+        style: {
+            color: '#E0E0E3',
+            textTransform: 'uppercase',
+            fontSize: '20px'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#E0E0E3',
+            textTransform: 'uppercase'
+        }
+    },
+    xAxis: {
+        gridLineColor: '#707073',
+        labels: {
+            style: {
+                color: '#E0E0E3'
+            }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        title: {
+            style: {
+                color: '#A0A0A3'
+
+            }
+        }
+    },
+    yAxis: {
+        gridLineColor: '#707073',
+        labels: {
+            style: {
+                color: '#E0E0E3'
+            }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        tickWidth: 1,
+        title: {
+            style: {
+                color: '#A0A0A3'
+            }
+        }
+    },
+    tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        style: {
+            color: '#F0F0F0'
+        }
+    },
+    plotOptions: {
+        series: {
+            dataLabels: {
+                color: '#B0B0B3'
+            },
+            marker: {
+                lineColor: '#333'
+            }
+        },
+        boxplot: {
+            fillColor: '#505053'
+        },
+        candlestick: {
+            lineColor: 'white'
+        },
+        errorbar: {
+            color: 'white'
+        }
+    },
+    legend: {
+        itemStyle: {
+            color: '#E0E0E3'
+        },
+        itemHoverStyle: {
+            color: '#FFF'
+        },
+        itemHiddenStyle: {
+            color: '#606063'
+        }
+    },
+    credits: {
+        style: {
+            color: '#666'
+        }
+    },
+    labels: {
+        style: {
+            color: '#707073'
+        }
+    },
+
+    drilldown: {
+        activeAxisLabelStyle: {
+            color: '#F0F0F3'
+        },
+        activeDataLabelStyle: {
+            color: '#F0F0F3'
+        }
+    },
+
+    navigation: {
+        buttonOptions: {
+            symbolStroke: '#DDDDDD',
+            theme: {
+                fill: '#505053'
+            }
+        }
+    },
+
+    // scroll charts
+    rangeSelector: {
+        buttonTheme: {
+            fill: '#505053',
+            stroke: '#000000',
+            style: {
+                color: '#CCC'
+            },
+            states: {
+                hover: {
+                    fill: '#707073',
+                    stroke: '#000000',
+                    style: {
+                        color: 'white'
+                    }
+                },
+                select: {
+                    fill: '#000003',
+                    stroke: '#000000',
+                    style: {
+                        color: 'white'
+                    }
+                }
+            }
+        },
+        inputBoxBorderColor: '#505053',
+        inputStyle: {
+            backgroundColor: '#333',
+            color: 'silver'
+        },
+        labelStyle: {
+            color: 'silver'
+        }
+    },
+
+    navigator: {
+        handles: {
+            backgroundColor: '#666',
+            borderColor: '#AAA'
+        },
+        outlineColor: '#CCC',
+        maskFill: 'rgba(255,255,255,0.1)',
+        series: {
+            color: '#7798BF',
+            lineColor: '#A6C7ED'
+        },
+        xAxis: {
+            gridLineColor: '#505053'
+        }
+    },
+
+    scrollbar: {
+        barBackgroundColor: '#808083',
+        barBorderColor: '#808083',
+        buttonArrowColor: '#CCC',
+        buttonBackgroundColor: '#606063',
+        buttonBorderColor: '#606063',
+        rifleColor: '#FFF',
+        trackBackgroundColor: '#404043',
+        trackBorderColor: '#404043'
+    },
+
+    // special colors for some of the
+    legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+    background2: '#505053',
+    dataLabelsColor: '#B0B0B3',
+    textColor: '#C0C0C0',
+    contrastTextColor: '#F0F0F3',
+    maskColor: 'rgba(255,255,255,0.3)'
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+</script>
+
+</head>
+<body>
+<div id="pre-div">
+    <div id="loader">
+    </div>
+</div>
+<!--/. PRELOADER END -->
+<div class="navbar navbar-default navbar-fixed-top move-me ">
+    <div class="container"
+
+        <div class="navbar-collapse collapse move-me">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li >
+                    <a href="#home">Dashboard
+
+                    </a>
+
+                </li>
+                <li >
+                    <a href="#about">ABOUT
+
+                    </a>
+
+                </li>
+
+                <li >
+                    <a href="#port-folio">GALLERY
+                    </a>
+
+                </li>
+
+                <li >
+                    <a href="#help">HOW TO HELP ?
+                    </a>
+
+                </li>
+
+                <li >
+                    <a href="#contact">CONTACT
+                    </a>
+
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <div id="container_1" style="width:550px; height: 300px; margin: 0 auto"></div>
+        </div>
+
+        <div>
+            <div id="container_2" style="width:550px; height: 300px; margin: 0 auto"></div>
+        </div>
+        
+        <div>
+            <div id="container_3" style="width:550px; height: 300px; margin: 0 auto"></div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+        <!-- 
+            1: Airbot
+            2: WaterBot
+            3: Sensaris
+            4: SensorDron
+            5: Electronic Nose
+         -->
+        <script>
+            var logs = JSON.parse('<%- JSON.stringify(logs) %>')
+            var header_info;
+            try{
+                header_info = logs[0].log.split(",")[0];
+            }
+            catch(e){
+
+            }
+            
+            var headers = [];
+
+            var data_1 = [];
+            var data_2 = [];
+            var data_3 = [];
+            switch (header_info){
+                case "1":
+                    headers.push("CO2");
+                    headers.push("O2");
+                    headers.push("SO2");
+                    break;
+
+                case "2":
+                    headers.push("Disolved_O2");
+                    headers.push("Hydrogen Power (Ph)");
+                    headers.push("Nitrates");
+                    break;
+                
+                case "3":
+                    headers.push("ATTR_1");
+                    headers.push("ATTR_2");
+                    headers.push("ATTR_3");
+                    break;
+
+                case "4":
+                    headers.push("ATTR_1");
+                    headers.push("ATTR_2");
+                    headers.push("ATTR_3");
+                    break;
+
+                case "5":
+                    headers.push("ATTR_1");
+                    headers.push("ATTR_2");
+                    headers.push("ATTR_3");
+                    break;
+
+                default:
+                    headers.push("ATTR_1");
+                    headers.push("ATTR_2");
+                    headers.push("ATTR_3"); 
+            }
+
+            logs.forEach(function(log){
+                
+                data_1.push([new Date(log.log.split(',')[4]).getTime(), parseFloat(log.log.split(',')[1])]);
+                data_2.push([new Date(log.log.split(',')[4]).getTime(), parseFloat(log.log.split(',')[2])]);
+                data_3.push([new Date(log.log.split(',')[4]).getTime(), parseFloat(log.log.split(',')[3])]);
+            })
+            
+            Highcharts.chart('container_1', {
+                  chart: {
+                    zoomType: 'x'
+                  },
+                  title: {
+                    text: headers[0] + ' Data'
+                  },
+                  subtitle: {
+                    text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                  },
+                  xAxis: {
+                    type: 'datetime'
+                  },
+                  yAxis: {
+                    title: {
+                      text: headers[0]
+                    }
+                  },
+                  legend: {
+                    enabled: false
+                  },
+                  plotOptions: {
+                    area: {
+                      fillColor: {
+                        linearGradient: {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                        },
+                        stops: [
+                          [0, Highcharts.getOptions().colors[0]],
+                          [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                      },
+                      marker: {
+                        radius: 2
+                      },
+                      lineWidth: 1,
+                      states: {
+                        hover: {
+                          lineWidth: 1
+                        }
+                      },
+                      threshold: null
+                    }
+                  },
+
+                  series: [{
+                    type: 'area',
+                    name: 'sensor',
+                    data: data_1
+                  }]
+                });
+
+            Highcharts.chart('container_2', {
+                  chart: {
+                    zoomType: 'x'
+                  },
+                  title: {
+                    text: headers[1] + ' Data'
+                  },
+                  subtitle: {
+                    text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                  },
+                  xAxis: {
+                    type: 'datetime'
+                  },
+                  yAxis: {
+                    title: {
+                      text: headers[1]
+                    }
+                  },
+                  legend: {
+                    enabled: false
+                  },
+                  plotOptions: {
+                    area: {
+                      fillColor: {
+                        linearGradient: {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                        },
+                        stops: [
+                          [0, Highcharts.getOptions().colors[0]],
+                          [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                      },
+                      marker: {
+                        radius: 2
+                      },
+                      lineWidth: 1,
+                      states: {
+                        hover: {
+                          lineWidth: 1
+                        }
+                      },
+                      threshold: null
+                    }
+                  },
+
+                  series: [{
+                    type: 'area',
+                    name: 'sensor',
+                    data: data_2
+                  }]
+                }); 
+
+            Highcharts.chart('container_3', {
+                  chart: {
+                    zoomType: 'x'
+                  },
+                  title: {
+                    text: headers[2] + ' Data'
+                  },
+                  subtitle: {
+                    text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                  },
+                  xAxis: {
+                    type: 'datetime'
+                  },
+                  yAxis: {
+                    title: {
+                      text: headers[2]
+                    }
+                  },
+                  legend: {
+                    enabled: false
+                  },
+                  plotOptions: {
+                    area: {
+                      fillColor: {
+                        linearGradient: {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                        },
+                        stops: [
+                          [0, Highcharts.getOptions().colors[0]],
+                          [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                      },
+                      marker: {
+                        radius: 2
+                      },
+                      lineWidth: 1,
+                      states: {
+                        hover: {
+                          lineWidth: 1
+                        }
+                      },
+                      threshold: null
+                    }
+                  },
+
+                  series: [{
+                    type: 'area',
+                    name: 'sensor',
+                    data: data_3
+                  }]
+                }); 
+
+        </script>
+
+
+<script src="../../assets/js/jquery-1.10.2.js"></script>
+<!--  Core Bootstrap Script -->
+<script src="../../assets/js/bootstrap.js"></script>
+<!--  WOW Script -->
+<script src="../../assets/js/wow.min.js"></script>
+<!--  Scrolling Script -->
+<script src="../../assets/js/jquery.easing.min.js"></script>
+<!--  PrettyPhoto Script -->
+<!--  Custom Scripts -->
+<script src="../../assets/js/custom.js"></script>
+
+</body>
+</html>
