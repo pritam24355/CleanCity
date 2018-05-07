@@ -118,6 +118,7 @@ app.get('/dashboard',function(req,res){
         res.render('dashboard', {stations: data});
     }
   }); 
+});
 
 
 app.get('/api/getcities', function (req, res) {
