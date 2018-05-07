@@ -46,7 +46,16 @@ app.post('/admincheck', function (req, res) {
 });
 
 app.get('/displayStations', function (req, res) {
-    res.render('displayStations')
+    var get_cities_SQL = "SELECT station_id, station_title, station_desc, lat, lng, isactive, modified FROM smartcity.station";
+    mysql_connection.executeQuery(get_cities_SQL, function (err, data) {
+        if (err) {
+            console.log(err);
+            res.status(500).send({"Message": "Internal Server Error"});
+        }
+        else {
+            res.render('displayStations',{stations: data})
+        }
+    });
 });
 
 app.get('/displaySensors', function (req, res) {
@@ -59,7 +68,7 @@ app.get('/displaySensors', function (req, res) {
         }
         else {
             console.log(data);
-            res.render('displaySensors', { sensors : data });
+            res.render('displaySensors', {sensors: data});
         }
     });
 });
@@ -74,7 +83,7 @@ app.get('/displaySensors/:station_id', function (req, res) {
         }
         else {
             console.log(data);
-            res.render('displaySensors', { sensors : data });
+            res.render('displaySensors', {sensors: data});
         }
     });
 });
@@ -93,7 +102,6 @@ app.get('/api/getcities', function (req, res) {
 });
 
 app.get('/api/get_stations_for_city/:city_id', function (req, res) {
-
     var get_cities_SQL = "SELECT station_id, station_title FROM smartcity.station WHERE station.city_id =" + req.params.city_id;
     mysql_connection.executeQuery(get_cities_SQL, function (err, data) {
         if (err) {
@@ -104,8 +112,6 @@ app.get('/api/get_stations_for_city/:city_id', function (req, res) {
             res.send(data);
         }
     });
-
-
 });
 
 app.get('/api/get_logs_for_sensor/:sensor_id', function (req, res) {
@@ -135,8 +141,6 @@ app.get('/dashboard', function (req, res) {
             res.render('dashboard', {stations: data});
         }
     });
-
-
 });
 app.get('/admin', function (req, res) {
     res.render("admin")
