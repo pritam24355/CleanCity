@@ -38,10 +38,19 @@ app.get('/', function (req, res) {
     res.render('home')
 });
 
+app.get('/adminsignin', function (req, res) {
+    // console.log(req.body);
+    // if (req.body.username == "admin" && req.body.password == "admin") {
+    //     res.render('adminLogin')
+    // }
+   res.render('adminsignin');
+
+});
 app.post('/admincheck', function (req, res) {
     console.log(req.body);
     if (req.body.username == "admin" && req.body.password == "admin") {
-        res.render('admin')
+     //   res.render('admin')
+        res.render('sensormanagement')
     }
 });
 
@@ -184,7 +193,7 @@ app.get('/table', function (req, res) {
     res.render('table')
 });
 app.get('/adminsensormanagement', function (req, res) {
-    res.render('sensormanagement')
+     res.render('sensormanagement')
 });
 app.get('/adminstationmanagement', function (req, res) {
     res.render('stationmanagement')

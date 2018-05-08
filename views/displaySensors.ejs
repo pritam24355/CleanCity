@@ -33,6 +33,12 @@
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <ul class="nav">
+                <li>
+                    <a href="/">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="/dashboard">
                         <i class="pe-7s-graph"></i>
@@ -102,7 +108,8 @@
                                     <td><%= sensors[i].sensor_desc %></td>
                                     <td><%= sensors[i].sensor_serial %></td>
                                     <td><%= sensors[i].isactive %></td>
-                                    <td style="color: #1F77D0" onclick="window.location='/displayStations'">click here</td>
+                                    <td style="color: #1F77D0" onclick="window.location='/sensors/'+<%= sensors[i].sensor_id %>">click here
+                                    </td>
                                 </tr>
                                 </tbody>
                                 <%

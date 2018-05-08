@@ -33,6 +33,12 @@
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <ul class="nav">
+                <li>
+                    <a href="/">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="/dashboard">
                         <i class="pe-7s-graph"></i>
@@ -102,7 +108,8 @@
                                     <td><%= stations[i].lat %></td>
                                     <td><%= stations[i].lng %></td>
                                     <td><%= stations[i].isactive %></td>
-                                    <td style="color: #1F77D0" onclick="window.location='/displaySensors'">click here</td>
+                                    <td style="color: #1F77D0" onclick="window.location='/displaySensors'">click here
+                                    </td>
                                     <td></td>
                                 </tr>
 
@@ -113,7 +120,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer small text-muted">Updated on <%= stations[stations.length-1].modified %></div>
+                    <div class="card-footer small text-muted">Updated
+                        on <%= stations[stations.length - 1].modified %></div>
                 </div>
             </div>
         </div>
