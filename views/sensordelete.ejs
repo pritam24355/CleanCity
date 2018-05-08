@@ -43,6 +43,8 @@
         -->
 
         <div class="sidebar-wrapper">
+
+
             <ul class="nav">
                 <li class="active">
                     <a href="/admin">
@@ -51,16 +53,21 @@
                     </a>
                 </li>
                 <li>
+                <li>
+                    <a href="/table">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Stationwise Data</p>
+                    </a>
+                </li>
                 <a href="/sensormanagement">
-                    <i class="pe-7s-note2"></i>
-                    <p>Sensor Management</p>
+                    <i class="pe-7s-news-paper"></i>
+                    <p>SENSOR MANAGEMENT</p>
                 </a>
                 </li>
-
                 <li>
                     <a href="/stationmanagement">
                         <i class="pe-7s-note2"></i>
-                        <p>Station Management</p>
+                        <p>STATION MANAGEMENT</p>
                     </a>
                 </li>
             </ul>
@@ -107,60 +114,30 @@
                                 <h1>SENSOR MANAGEMENT</h1>
                                 <a href="/sensormanagement" class="btn btn-group-sm">ADD</a>
                                 <a href="/sensorupdate" class="btn btn-group-sm">UPDATE</a>
-                                <a href="/sensordelete" class="btn btn-group-sm">DELETE</a>
+                                <button class="btn btn-group-sm">DELETE</button>
 
                             </div>
                             <div class="content">
-                                <form action="/sensorsubmit" METHOD="post">
+                                <form action="/sensordelete" METHOD="post">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Select Station</label>
+                                                <label>Select Sensor </label>
                                                 <div>
-                                                    <select class="form-control" name="stationid">
-                                                        <% for (var i = 0; i < stations.length; i++) { %>
-                                                        <option type="number" value="<%= stations[i].station_id %>"><%= stations[i].station_title %></option>
+                                                    <select class="form-control" name="sensorid">
+                                                        <% for (var i = 0; i < sensors.length; i++) { %>
+                                                        <option type="number" value="<%= sensors[i].sensor_id %>"><%= sensors[i].sensor_title %></option>
                                                         <% } %>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>SENSOR SERIAL</label>
-                                                <input type="number" class="form-control" name="sensorserial" placeholder="Sensor Serial">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Sensor Title</label>
-                                                <input type="text" class="form-control" name="sensortitle" placeholder="Sensor Title">
+                                        <div class="col-md-6">
+                                            <div class="form-group sensordeletebutton">
+                                        <button type="submit" class="btn btn-info btn-fill">DELETE SENSOR</button>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Sensor Desc</label>
-                                                <input type="text" class="form-control" name="sensordesc" placeholder="Sensor Description">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Active Status</label>
-                                                    <input type="number" class="form-control" name="isactive" placeholder="IsActive(0/1)" >
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-
-                                        <button type="submit" class="btn btn-info btn-fill sensor">ADD SENSOR</button>
                                         <div class="clearfix"></div>
                                 </form>
                             </div>

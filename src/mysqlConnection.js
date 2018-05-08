@@ -1,12 +1,13 @@
 var mysql = require('mysql');
+var express = require("express");
+var app     = express();
 
 var pool  = mysql.createPool({
-  host     : 'smartcity281.csjl3uczphdg.us-west-1.rds.amazonaws.com',
-  user     : 'cmpe281user',
-  password : 'qwerty1234',
-  database : 'smartcity'
+    host     : 'smartcity281.csjl3uczphdg.us-west-1.rds.amazonaws.com',
+    user     : 'cmpe281user',
+    password : 'qwerty1234',
+    database : 'smartcity'
 });
- 
 
 exports.executeQuery = function(query, callback){
 
