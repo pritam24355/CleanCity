@@ -93,7 +93,6 @@
                                     <th>Latitude</th>
                                     <th>Logitude</th>
                                     <th>Active status</th>
-                                    <th>Analysis Link</th>
                                 </tr>
                                 </thead>
                                 <% for(var i in stations)
@@ -108,8 +107,6 @@
                                     <td><%= stations[i].lat %></td>
                                     <td><%= stations[i].lng %></td>
                                     <td><%= stations[i].isactive %></td>
-                                    <td style="color: #1F77D0" onclick="window.location='/displaySensors'">click here
-                                    </td>
                                     <td></td>
                                 </tr>
 
