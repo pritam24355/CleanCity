@@ -34,92 +34,36 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-        <!--
-
-            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-            Tip 2: you can also add an image using data-image tag
-
-        -->
-
-        <div class="sidebar-wrapper">
-            <ul class="nav">
-                <li class="active">
-                    <a href="/">
-                        <i class="pe-7s-graph"></i>
-                        <p>Home</p>
-                    </a>
-                </li>
-                <li>
-                <a href="/adminsensormanagement">
-                    <i class="pe-7s-news-paper"></i>
-                    <p>SENSOR MANAGEMENT</p>
-                </a>
-                </li>
-                <li>
-                    <a href="/adminstationmanagement">
-                        <i class="pe-7s-note2"></i>
-                        <p>STATION MANAGEMENT</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <h3>CLEANCITY</h3>
+
+        <div class="collapse navbar-collapse">
+            <h3 style="    margin-left: 430px;font-family: initial; font-size: -webkit-xxx-large;color: darkblue;margin-top: 10%">
+                CLEANCITY</h3>
+
+        </div>
 
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="">
-                                <p>Account</p>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="/">
-                                <p>Log out</p>
-                            </a>
-                        </li>
-                        <li class="separator hidden-lg hidden-md"></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-        <div style="margin-left: 500px;             width: 1600px;             margin-top: 100px">
-            <div class="col-lg-3 col-md-3">
+        <div style="margin-left: 200px;             width: 1600px;             margin-top: 100px">
+            <div style="    border-style: double;    width: 50%;     color: black;    background-color: gray;" class="col-lg-3 col-md-3 ">
                 <div class="div-trans text-center">
-                    <h3>ADMIN LOGIN</h3>
+                    <h3 style="color: white">ADMIN LOGIN</h3>
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <form name="adminlogin" enctype="application/x-www-form-urlencoded" method="POST"
                               action="/admincheck">
 
                             <div class="form-group">
-                                <input type="text" class="form-control" required="required" name="username" placeholder="Username">
+                                <input type="text" class="form-control" required="required" name="username"
+                                       placeholder="Username">
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control" required="required" name="password" placeholder="Password">
+                                <input type="password" class="form-control" required="required" name="password"
+                                       placeholder="Password">
                             </div>
                             <div class="form-group">
-                                <button type="submit"  class="btn btn-success btn-block btn-lg">Login</button>
+                                <button style="color: white" type="submit" class="btn btn-success btn-block btn-lg">Login</button>
                             </div>
                         </form>
                     </div>

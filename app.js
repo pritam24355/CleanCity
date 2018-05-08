@@ -7,7 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-
+var JSAlert = require("js-alert");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -36,28 +36,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', users);
 
 
-app.get('/',function(req,res){
+app.get('/', function (req, res) {
     res.render('home')
 });
 
 app.get('/adminsignin', function (req, res) {
 
-   res.render('adminsignin');
+    res.render('adminsignin');
 
-app.get('/admin',function (req,res) {
-    res.render("admin")
-});
+    app.get('/admin', function (req, res) {
+        res.render("admin")
+    });
 
 });
 app.post('/admincheck', function (req, res) {
     console.log(req.body);
     if (req.body.username == "admin" && req.body.password == "admin") {
-     //   res.render('admin')
-        res.render('sensormanagement')
+        //   res.render('admin')
+        res.render('admin')
     }
 
 });
-app.get('/sensormanagement',function (req,res) {
+app.get('/sensormanagement', function (req, res) {
     var get_stations_SQL = "SELECT station_id, station_title FROM smartcity.station";
 
 
@@ -69,21 +69,21 @@ app.get('/sensormanagement',function (req,res) {
     });
 })
 
-app.get('/stationmanagement',function (req,res) {
+app.get('/stationmanagement', function (req, res) {
 
     var get_cities_SQL = "SELECT city_id, city_name FROM smartcity.city";
-    mysql_connection.executeQuery(get_cities_SQL, function(err, cities){
-            if(err)
-                throw new Error(err);
+    mysql_connection.executeQuery(get_cities_SQL, function (err, cities) {
+        if (err)
+            throw new Error(err);
 
-            res.render('stationmanagement', {cities: cities});
-        })
+        res.render('stationmanagement', {cities: cities});
+    })
 });
 
-app.get('/sensordelete', function(req, res){
+app.get('/sensordelete', function (req, res) {
     var get_sensors_SQL = "SELECT sensor_id, sensor_title FROM smartcity.sensor";
-    mysql_connection.executeQuery(get_sensors_SQL, function(err, sensors){
-        if(err)
+    mysql_connection.executeQuery(get_sensors_SQL, function (err, sensors) {
+        if (err)
             throw new Error(err);
 
         res.render('sensordelete', {sensors: sensors});
@@ -91,7 +91,7 @@ app.get('/sensordelete', function(req, res){
 
 });
 
-app.get('/stationdelete', function(req, res){
+app.get('/stationdelete', function (req, res) {
     var get_stations_SQL = "SELECT station_id, station_title FROM smartcity.station";
 
     mysql_connection.executeQuery(get_stations_SQL, function (err, stations) {
@@ -105,7 +105,7 @@ app.get('/stationdelete', function(req, res){
 
 });
 
-app.get('/stationupdate', function(req, res) {
+app.get('/stationupdate', function (req, res) {
     var get_stations_SQL = "SELECT station_id, station_title FROM smartcity.station";
 
     mysql_connection.executeQuery(get_stations_SQL, function (err, stations) {
@@ -125,7 +125,7 @@ app.get('/displayStations', function (req, res) {
             res.status(500).send({"Message": "Internal Server Error"});
         }
         else {
-            res.render('displayStations',{stations: data})
+            res.render('displayStations', {stations: data})
         }
     });
 });
@@ -160,36 +160,36 @@ app.get('/displaySensors/:station_id', function (req, res) {
     });
 });
 
-app.get('/sensors/:sensor_id', function(req, res){
-   
-  var get_cities_SQL = "SELECT concat(log_data, ',',  created) as log FROM smartcity.sensor_log where sensor_id = "+req.params.sensor_id + " order by created desc";
+app.get('/sensors/:sensor_id', function (req, res) {
 
-  mysql_connection.executeQuery(get_cities_SQL, function(err, data){
-    if(err){
-      console.log(err);
-      res.status(500).send({"Message": "Internal Server Error"});
-    }
-    else{
-      console.log(data)
-        res.render('report', {logs: data});
-    }
-  });
+    var get_cities_SQL = "SELECT concat(log_data, ',',  created) as log FROM smartcity.sensor_log where sensor_id = " + req.params.sensor_id + " order by created desc";
+
+    mysql_connection.executeQuery(get_cities_SQL, function (err, data) {
+        if (err) {
+            console.log(err);
+            res.status(500).send({"Message": "Internal Server Error"});
+        }
+        else {
+            console.log(data)
+            res.render('report', {logs: data});
+        }
+    });
 });
 
 
-app.get('/dashboard',function(req,res){
-  var getStations_SQL = 'SELECT concat("Title: ", station_title, " | Description: ", station_desc) as station, lat, lng, station_id FROM smartcity.station';
-  mysql_connection.executeQuery(getStations_SQL, function(err, data){
-    console.log(JSON.stringify( data ));
-    if(err){
-      console.log(err);
-      res.status(500).send({"Message": "Internal Server Error"});
-    }
-    else{
-      console.log(data[0].lat);
-        res.render('dashboard', {stations: data});
-    }
-  }); 
+app.get('/dashboard', function (req, res) {
+    var getStations_SQL = 'SELECT concat("Title: ", station_title, " | Description: ", station_desc) as station, lat, lng, station_id FROM smartcity.station';
+    mysql_connection.executeQuery(getStations_SQL, function (err, data) {
+        console.log(JSON.stringify(data));
+        if (err) {
+            console.log(err);
+            res.status(500).send({"Message": "Internal Server Error"});
+        }
+        else {
+            console.log(data[0].lat);
+            res.render('dashboard', {stations: data});
+        }
+    });
 });
 
 
@@ -219,7 +219,7 @@ app.get('/api/get_stations_for_city/:city_id', function (req, res) {
     });
 });
 
-app.get('/sensorupdate', function(req, res) {
+app.get('/sensorupdate', function (req, res) {
     var get_sensors_SQL = "SELECT sensor_id, sensor_title FROM smartcity.sensor";
 
     mysql_connection.executeQuery(get_sensors_SQL, function (err, sensors) {
@@ -249,7 +249,6 @@ app.get('/api/get_logs_for_sensor/:sensor_id', function (req, res) {
 });
 
 
-
 app.post("/stationsubmit", function (req, res) {
 
 
@@ -263,18 +262,18 @@ app.post("/stationsubmit", function (req, res) {
 
     // con.connect(function(err) {
 
-        // if (err) throw err;
+    // if (err) throw err;
 
-        var sql = "INSERT INTO smartcity.station (`city_id`, `station_title`, `station_desc`, `lat`, `lng`, `isactive`) VALUES ('"+cityid+"','"+stationtitle+"', '"+stationdesc+"', '"+latitude+"', '"+longitude+"', '"+isactive+"')";
+    var sql = "INSERT INTO smartcity.station (`city_id`, `station_title`, `station_desc`, `lat`, `lng`, `isactive`) VALUES ('" + cityid + "','" + stationtitle + "', '" + stationdesc + "', '" + latitude + "', '" + longitude + "', '" + isactive + "')";
 
-        mysql_connection.executeQuery(sql, function (err, result) {
+    mysql_connection.executeQuery(sql, function (err, result) {
 
-            if (err) throw err;
+        if (err) throw err;
 
-            console.log("1 record inserted");
+        console.log("1 record inserted");
 
-            res.render("/stationsubmit");
-        });
+        res.render("/stationsubmit");
+    });
     // }
 
 
@@ -284,7 +283,7 @@ app.post("/stationsubmit", function (req, res) {
 app.post("/stationupdate", function (req, res) {
 
 
-    var stationid= req.body.stationid;
+    var stationid = req.body.stationid;
     //var stationtitle = req.body.stationtitle;
     var stationdesc = req.body.stationdesc;
     var latitude = req.body.latitude;
@@ -297,7 +296,7 @@ app.post("/stationupdate", function (req, res) {
 
     // if (err) throw err;
 
-    var sql = "UPDATE smartcity.station SET station_desc='"+stationdesc+"', lat='"+latitude+"', lng='"+longitude+"', isactive='"+isactive+"' WHERE station_id='"+stationid+"'";
+    var sql = "UPDATE smartcity.station SET station_desc='" + stationdesc + "', lat='" + latitude + "', lng='" + longitude + "', isactive='" + isactive + "' WHERE station_id='" + stationid + "'";
 
     mysql_connection.executeQuery(sql, function (err, result) {
 
@@ -318,12 +317,11 @@ app.post("/stationdelete", function (req, res) {
     console.log(stationid);
 
 
-
     // con.connect(function(err) {
 
     // if (err) throw err;
 
-    var sql = "DELETE FROM smartcity.station WHERE station_id ='"+stationid+"'";
+    var sql = "DELETE FROM smartcity.station WHERE station_id ='" + stationid + "'";
 
     mysql_connection.executeQuery(sql, function (err, result) {
 
@@ -348,23 +346,22 @@ app.post("/sensorsubmit", function (req, res) {
     var isactive = req.body.isactive;
 
 
-
     // con.connect(function(err) {
     //
     //     if (err) throw err;
 
-        var sql = "INSERT INTO smartcity.sensor (`station_id`, `sensor_title`, `sensor_desc`, `sensor_serial`, `isactive`) VALUES ('"+stationid+"','"+sensortitle+"', '"+sensordesc+"', '"+sensorserial+"', '"+isactive+"')";
+    var sql = "INSERT INTO smartcity.sensor (`station_id`, `sensor_title`, `sensor_desc`, `sensor_serial`, `isactive`) VALUES ('" + stationid + "','" + sensortitle + "', '" + sensordesc + "', '" + sensorserial + "', '" + isactive + "')";
 
-        mysql_connection.executeQuery(sql, function (err, result) {
+    mysql_connection.executeQuery(sql, function (err, result) {
 
-            if (err) throw err;
+        if (err) throw err;
 
-            console.log("1 record inserted");
+        console.log("1 record inserted");
 
-            res.render("sensormanagement");
+        res.render("sensormanagement");
 
 
-        });
+    });
 
 });
 
@@ -424,9 +421,5 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
 
 });
-
-
-
-
 
 module.exports = app;
