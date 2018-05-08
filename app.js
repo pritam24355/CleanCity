@@ -162,7 +162,7 @@ app.get('/displaySensors/:station_id', function (req, res) {
 
 app.get('/sensors/:sensor_id', function (req, res) {
 
-    var get_cities_SQL = "SELECT concat(log_data, ',',  created) as log FROM smartcity.sensor_log where sensor_id = " + req.params.sensor_id + " order by created desc";
+    var get_cities_SQL = "SELECT concat(log_data, ',',  created) as log FROM smartcity.sensor_log where sensor_id = " + req.params.sensor_id + " order by created desc limit 300";
 
     mysql_connection.executeQuery(get_cities_SQL, function (err, data) {
         if (err) {
